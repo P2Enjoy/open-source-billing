@@ -18,6 +18,8 @@ class ProjectsController < ApplicationController
     load_projects
     @projects = filter_by_company(@projects) if @projects
     authorize @projects
+
+    @projects = Kaminari.paginate_array(@projects).page(params[:page]).per(@per_page)
     respond_to do |format|
       format.html # index.html.erb
       format.js
