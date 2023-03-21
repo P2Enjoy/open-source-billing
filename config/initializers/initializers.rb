@@ -259,7 +259,7 @@ INDUSTRY_LIST = ['Accommodation & Hospitality',
                  'Other'
 ]
 
-DISCOUNT_TYPE = %w(% USD)
+DISCOUNT_TYPE = %w(% EUR)
 
 DATE_FORMATS = [
     ['dd-mon-yyyy' + ' ' + '(31-Jan-98)'  , '%d-%b-%Y'],
@@ -305,7 +305,8 @@ INVOICE_DATE_TO_USE = [['Invoice Date', 'invoice_date'], ['Paid Date', 'paid_dat
 
 CREDIT_CARD_TYPE = ['Visa', 'Master Card', 'Discover', 'American Express']
 
-COMPANY_SIZE = ['1-10 employees',
+COMPANY_SIZE = ['0-1 employee',
+                '1-10 employees',
                 '11-100 employees',
                 '101-500 employees',
                 'Over 500 employees']
@@ -437,7 +438,7 @@ CUSTOM_FIELDS = {
 ROLE = 'Super Admin'
 CLIENT_ROLE = 'Clients'
 
-ENTITIES = ['Account','Category', 'Client', 'Company', 'CompanyEmailTemplate', 'CompanyEntity', 'Currency', 'EmailTemplate', 'Estimate', 'ExpenseCategory', 'Expense', 'InvoiceLineItem', 'InvoiceTask', 'Invoice', 'Item', 'LineItemTax', 'Log', 'PaymentTerm', 'Payment', 'ProjectTask', 'Project', 'RecurringProfileLineItem', 'RecurringProfile', 'Role', 'SentEmail', 'Staff', 'Task', 'TeamMember']
+ENTITIES = %w[Account Category Client Company CompanyEmailTemplate CompanyEntity Currency EmailTemplate Estimate ExpenseCategory Expense InvoiceLineItem InvoiceTask Invoice Item LineItemTax Log PaymentTerm Payment ProjectTask Project RecurringProfileLineItem RecurringProfile Role SentEmail Staff Task TeamMember]
 
 ENTITY_TYPES = %w(Invoice Estimate Payment Client Item Taxes Report Settings)
 CLIENT_ENTITY_TYPES = %w(Invoice Estimate Payment Settings)

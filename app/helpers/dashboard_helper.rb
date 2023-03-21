@@ -25,7 +25,7 @@ module DashboardHelper
 
   def number_to_currency_dashboard(number, options={})
     return nil unless number
-    symbol       = options[:unit] || 'USD'
+    symbol       = options[:unit] || 'EUR'
     precision    = options[:precision] || 2
     old_currency = number_to_currency(number, {precision: precision})
     old_currency.chr=='-' ? old_currency.slice!(1) : old_currency.slice!(0)

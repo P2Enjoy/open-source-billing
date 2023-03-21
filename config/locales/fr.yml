@@ -3,8 +3,8 @@
 # This file contains French translation
 
 fr:
-  currency_unit: "$"
-  currency_code: "USD"
+  currency_unit: "€"
+  currency_code: "EUR"
 
   company: "société"
   invoice: "facture"

@@ -112,7 +112,7 @@ module V1
            }
 
       get :base_currency_amount_billed_graph do
-        invoices = Invoice.by_company(@current_user.current_company).joins(:currency).where('invoices.invoice_date > ?', 6.months.ago).group('MONTHNAME(invoices.invoice_date)').order('invoice_date asc').sum('base_currency_equivalent_total')
+        invoices = Invoice.by_company(@current_user.current_company).joins(:currency).where('invoices.invoice_date > ?', 6.months.ago).group("strftime('%m', invoices.invoice_date)").order('invoice_date asc').sum('base_currency_equivalent_total')
         invoices = invoices.map{|k, v|[[Company.find(@current_user.current_company).base_currency.unit, k],v.round(2)]}.to_h
         base_currency_invoices = []
         invoices.each{|k, v| base_currency_invoices << {currency: k[0], month: k[1], amount: v.to_s}}
@@ -128,7 +128,7 @@ module V1
            }
 
       get :base_currency_ytd_income do
-        total = Invoice.by_company(@current_user.current_company).joins(:payments).where('extract(year from payments.created_at) = ?', Date.today.year).sum('invoices.base_currency_equivalent_total').round(2).to_s
+        total = Invoice.by_company(@current_user.current_company).joins(:payments).where("strftime('%Y', payments.created_at)= ?", Date.today.year).sum('invoices.base_currency_equivalent_total').round(2).to_s
         currency = Company.find(@current_user.current_company).base_currency.unit
         total+' '+currency
       end
@@ -170,7 +170,7 @@ module V1
 
       get :invoices_graph do
         @invoices_graph = Invoice.by_company(@current_user.current_company).where('invoices.created_at > ?', 6.months.ago)
-            .joins(:currency).group('currencies.unit').group('MONTHNAME(invoices.invoice_date)').order('invoices.created_at asc').sum('invoices.invoice_total')
+            .joins(:currency).group('currencies.unit').group("strftime('%m', invoices.invoice_date)").order('invoices.created_at asc').sum('invoices.invoice_total')
         invoices_graph = []
         @invoices_graph.each { |k,v| invoices_graph << {currency: k[0], month: k[1], amount: v} }
         invoices_graph
@@ -186,7 +186,7 @@ module V1
 
       get :payments_graph do
         @payments_graph = Payment.by_company(@current_user.current_company).where('payments.payment_date > ?', 6.months.ago)
-            .joins(:currency).group('currencies.unit').group('MONTHNAME(payments.payment_date)').order('payments.created_at asc')
+            .joins(:currency).group('currencies.unit').group("strftime('%m', payments.payment_date)").order('payments.created_at asc')
             .sum('payments.payment_amount')
         payments_graph = []
         @payments_graph.each { |k,v| payments_graph << {currency: k[0], month: k[1], amount: v} }
@@ -202,8 +202,8 @@ module V1
            }
 
       get :monthly_invoices_payments do
-        @monthly_invoices = Invoice.by_company(@current_user.current_company).where('created_at > ?', 6.months.ago).group('MONTHNAME(invoices.created_at)').order('created_at asc').count
-        @monthly_payments = Payment.by_company(@current_user.current_company).where('created_at > ?', 6.months.ago).group('MONTHNAME(payments.created_at)').order('created_at asc').count
+        @monthly_invoices = Invoice.by_company(@current_user.current_company).where('created_at > ?', 6.months.ago).group("strftime('%m', invoices.created_at)").order('created_at asc').count
+        @monthly_payments = Payment.by_company(@current_user.current_company).where('created_at > ?', 6.months.ago).group("strftime('%m', payments.created_at)").order('created_at asc').count
         @monthly_invoices_payments = []
         keys = @monthly_invoices.keys
         keys.each { |k| @monthly_invoices_payments << {month: k ,invoices: @monthly_invoices[k], payments: @monthly_payments[k]} }
@@ -225,8 +225,8 @@ module V1
         payments = Payment.select('payments.id, clients.organization_name, payments.payment_amount, payments.created_at, invoice_id')
                        .joins(:invoice => :client).where(company_id: @current_user.current_company).order('created_at desc').limit(10)
         recent_activities = []
-        invoices.each {|inv| recent_activities << {:activity_type => "invoice", :activity_action => "sent to", :client => (inv.unscoped_client.organization_name rescue ''), :amount => inv.invoice_total, :unit => (inv.currency.present? ? inv.currency.unit : "USD"), :code => (inv.currency.present? ? inv.currency.code : "$"), :activity_date => inv.created_at.strftime("%d/%m/%Y")}}
-        payments.each { |pay| recent_activities << {:activity_type => "payment", :activity_action => "received from", :client => (pay.invoice.unscoped_client.organization_name rescue ''), :amount => pay.payment_amount, :unit => (pay.invoice.currency.present? ? pay.invoice.currency.unit : "USD"), :code => (pay.invoice.currency.present? ? pay.invoice.currency.code : "$"), :activity_date => pay.created_at.strftime("%d/%m/%Y")} }
+        invoices.each {|inv| recent_activities << {:activity_type => "invoice", :activity_action => "sent to", :client => (inv.unscoped_client.organization_name rescue ''), :amount => inv.invoice_total, :unit => (inv.currency.present? ? inv.currency.unit : "EUR"), :code => (inv.currency.present? ? inv.currency.code : "€"), :activity_date => inv.created_at.strftime("%d/%m/%Y")}}
+        payments.each { |pay| recent_activities << {:activity_type => "payment", :activity_action => "received from", :client => (pay.invoice.unscoped_client.organization_name rescue ''), :amount => pay.payment_amount, :unit => (pay.invoice.currency.present? ? pay.invoice.currency.unit : "EUR"), :code => (pay.invoice.currency.present? ? pay.invoice.currency.code : "€"), :activity_date => pay.created_at.strftime("%d/%m/%Y")} }
         recent_activities.sort{ |a, b| b[:activity_date] <=> a[:activity_date] }
         recent_activities.group_by{|a| a[:activity_date]}
       end

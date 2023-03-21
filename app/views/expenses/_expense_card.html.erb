@@ -11,10 +11,10 @@
     <div class="invoice-details">
       <h5><%= expense.client.organization_name %></h5>
       <strong><%= expense.category.name %></strong>
-      <em><%= "#{number_to_currency(expense.amount, unit: expense.currency.present? ? expense.currency.code : "$")} " %><span><%= expense.currency.unit%></span></em>
+      <em><%= "#{number_to_currency(expense.amount, unit: expense.currency.present? ? expense.currency.code : "€")} " %><span><%= expense.currency.unit%></span></em>
       <div class="amount-box">
         <span>Total amount</span>
-        <strong><%= "#{number_to_currency(expense.total, unit: expense.currency.present? ? expense.currency.code : "$")} " %><small><%= expense.currency.unit%></small></strong>
+        <strong><%= "#{number_to_currency(expense.total, unit: expense.currency.present? ? expense.currency.code : "€")} " %><small><%= expense.currency.unit%></small></strong>
       </div>
       <div class="card-footer clearfix">
         <span class="invoice-date"> <%=  expense.expense_date %></span>

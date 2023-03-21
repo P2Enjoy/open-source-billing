@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
 #users = User.create([
 #    {:email => 'imran@nxb.com.pk', :crypted_password => '9027ed25057cef842561eb3f58739556e09d85f4'},
 #    {:email => 'muhammad.azeem@nxb.com.pk', :crypted_password => '9027ed25057cef842561eb3f58739556e09d85f4'},
@@ -69,15 +61,15 @@
 #      :tax_2 => tax1
 #    }])
 EmailTemplate.delete_all
-ActiveRecord::Base.connection.execute("TRUNCATE email_templates")
+ActiveRecord::Base.connection.execute("DELETE FROM email_templates")
 CompanyEmailTemplate.delete_all
-ActiveRecord::Base.connection.execute("TRUNCATE company_email_templates")
+ActiveRecord::Base.connection.execute("DELETE FROM company_email_templates")
 templates = EmailTemplate.create([
         {
             :torder => 1,
             :status => 'Default',
             :template_type => 'New Invoice',
-            :email_from => 'nfor20@yahoo.com',
+            :email_from => 'billing@p2enjoy.studio',
             :cc => '',
             :bcc => '',
             :subject => '{{client_company}}: {{company_name}} Invoice: {{invoice_number}}',
@@ -94,7 +86,7 @@ templates = EmailTemplate.create([
             :torder => 2,
             :status => 'Default',
             :template_type => 'Payment Received',
-            :email_from => 'nfor20@yahoo.com',
+            :email_from => 'billing@p2enjoy.studio',
             :cc => '',
             :bcc => '',
             :subject => '{{company_name}} has received your payment for invoice {{invoice_number}}',
@@ -109,7 +101,7 @@ templates = EmailTemplate.create([
             :torder => 3,
             :status => 'Default',
             :template_type => 'First Late Payment Reminder',
-            :email_from => 'nfor20@yahoo.com',
+            :email_from => 'billing@p2enjoy.studio',
             :cc => '',
             :bcc => '',
             :subject => '{{client_company}}: {{company_name}} Invoice is Past Due',
@@ -155,7 +147,7 @@ templates = EmailTemplate.create([
             :torder => 6,
             :status => 'Default',
             :template_type => 'Dispute Invoice',
-            :email_from => 'nfor20@yahoo.com',
+            :email_from => 'billing@p2enjoy.studio',
             :cc => '',
             :bcc => '',
             :subject => 'Client Dispute Notification: {{client_company}}',
@@ -170,7 +162,7 @@ templates = EmailTemplate.create([
             :torder => 7,
             :status => 'Default',
             :template_type => 'Dispute Reply',
-            :email_from => 'nfor20@yahoo.com',
+            :email_from => 'billing@p2enjoy.studio',
             :cc => '',
             :bcc => '',
             :subject => '{{company_name}} Dispute Response regarding invoice {{invoice_number}}',
@@ -186,7 +178,7 @@ templates = EmailTemplate.create([
             :torder => 8,
             :status => 'Default',
             :template_type => 'New User',
-            :email_from => 'nfor20@yahoo.com',
+            :email_from => 'billing@p2enjoy.studio',
             :cc => '',
             :bcc => '',
             :subject => "Welcome to {{company_name}}'s invoicing services provided by Open Source Billing.",
@@ -204,7 +196,7 @@ templates = EmailTemplate.create([
             :torder => 9,
             :status => 'Default',
             :template_type => 'New Estimate',
-            :email_from => 'nfor20@yahoo.com',
+            :email_from => 'billing@p2enjoy.studio',
             :cc => '',
             :bcc => '',
             :subject => '{{client_company}}: {{company_name}} Estimate: {{estimate_number}}',
@@ -218,7 +210,7 @@ templates = EmailTemplate.create([
         {   :torder => 10,
             :status => 'Default',
             :template_type => 'Soft Payment Reminder',
-            :email_from => 'nfor20@yahoo.com',
+            :email_from => 'billing@p2enjoy.studio',
             :cc => '',
             :bcc => '',
             :subject => '{{client_company}}: {{company_name}} Invoice will Due after 3 Days',
@@ -243,14 +235,14 @@ end
 
 #creating default currencies
 Currency.delete_all
-ActiveRecord::Base.connection.execute("TRUNCATE currencies")
+ActiveRecord::Base.connection.execute("DELETE FROM currencies")
 sample_currencies = []
-not_currencies = ['BTC', 'XAG', 'XAU', 'XDR']
+not_currencies = %w[BTC XAG XAU XDR]
 Money::Currency.all.collect{|x| sample_currencies << {code: x.symbol,unit: x.iso_code,title: x.name} if not_currencies.exclude?(x.iso_code)}
 Currency.create(sample_currencies)
 
 # set default currencies to clients
-default_currency = (Currency.where(unit: 'USD').first || Currency.first)
+default_currency = (Currency.where(unit: 'EUR').first || Currency.first)
 Client.where(currency_id: nil).update_all(currency_id: default_currency.id)
 Invoice.where(currency_id: nil).update_all(currency_id: default_currency.id)
 RecurringProfile.where(currency_id: nil).update_all(currency_id: default_currency.id)
@@ -297,23 +289,23 @@ PaymentTerm.create(number_of_days: 0, description: "Due on received")
 
 Settings.delete_all
 Settings.currency = "On"
-Settings.default_currency = "USD"
+Settings.default_currency = "EUR"
 Settings.date_format = "%Y-%m-%d"
 Settings.invoice_number_format = "{{invoice_number}}"
 Settings.invoice_item_format = "{{item_description}}"
 
 Account.delete_all
-Account.create(org_name: 'OpenSourceBilling')
+Account.create(org_name: 'P2Enjoy SAS')
 
 Company.delete_all
 Company.create(company_name: Account.first.org_name, account_id: Account.first.id)
 
 User.destroy_all
 u=User.new
-u.email = "admin@opensourcebilling.org"
-u.password = "opensourcebilling"
-u.password_confirmation = "opensourcebilling"
-u.user_name = "OSB"
+u.email = "billing@p2enjoy.studio"
+u.password = "mabe!0301"
+u.password_confirmation = "mabe!0301"
+u.user_name = "Martino Bettucci"
 u.role_id = Role.first.id
 u.have_all_companies_access = true
 u.current_company = Company.first.id

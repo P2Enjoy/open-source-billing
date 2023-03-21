@@ -70,7 +70,7 @@ module EstimatesHelper
 
   def number_to_currency1(number, options={})
     return nil unless number
-    symbol       = options[:unit] || 'USD'
+    symbol       = options[:unit] || 'EUR'
     precision    = options[:precision] || 2
     old_currency = number_to_currency(number, {precision: precision})
     old_currency.chr=='-' ? old_currency.slice!(1) : old_currency.slice!(0)
@@ -79,7 +79,7 @@ module EstimatesHelper
 
   def taxes_list list,estimate=nil
     tax_list = ""
-    currency_unit = estimate.nil? ? '$' : (estimate.currency.present? ? estimate.currency.unit : '$')
+    currency_unit = estimate.nil? ? '€' : (estimate.currency.present? ? estimate.currency.unit : '€')
     for tax, amount in list
       tax_list += <<-HTML
       <div class="top_right_row"><div class="preview_right_label">#{tax}</div><div class="preview_right_description">#{number_to_currency(amount,unit: currency_unit)}</div></div>

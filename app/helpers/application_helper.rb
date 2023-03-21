@@ -30,9 +30,9 @@ module ApplicationHelper
 
   def intro_class
     if params[:action].eql?('new') || params[:action].eql?('enter_payment')
-      params[:controller]+"-"+params[:action]+"-"+"#{current_user.introduction.send('new_'+params[:controller].singularize)}"+"-intro"
+      params[:controller]+"-"+params[:action]+"-"+"#{current_user.introduction.send('new_'+params[:controller].singularize) rescue true}"+"-intro"
     else
-      params[:controller]+"-"+params[:action]+"-"+"#{current_user.introduction.send(params[:controller].singularize)}"+"-intro" unless params[:action].eql?('show')
+      params[:controller]+"-"+params[:action]+"-"+"#{current_user.introduction.send(params[:controller].singularize) rescue true}"+"-intro" unless params[:action].eql?('show')
     end
   end
 
@@ -252,7 +252,7 @@ module ApplicationHelper
   def currencies
     #Currency.where(id: filter_by_company(Invoice,'invoices').group_by(&:currency_id).keys.compact)
     currencies = Currency.where(id: (Invoice.select("DISTINCT(currency_id)").map &:currency_id) )
-    currencies = Currency.where(unit: 'USD') if currencies.empty?
+    currencies = Currency.where(unit: 'EUR') if currencies.empty?
     currencies
   end
 

@@ -2,8 +2,8 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  currency_unit: "$"
-  currency_code: "USD"
+  currency_unit: "€"
+  currency_code: "EUR"
 
   company: "Company"
   invoice: "Invoice"

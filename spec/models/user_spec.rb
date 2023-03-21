@@ -45,11 +45,11 @@ describe User do
   end
 
   it '#currency_symbol' do
-    expect(first_user.currency_symbol).to eq('$')
+    expect(first_user.currency_symbol).to eq('€')
   end
 
   it '#currency_code' do
-    expect(first_user.currency_code).to eq('USD')
+    expect(first_user.currency_code).to eq('EUR')
   end
 
   it '#already_exists?' do

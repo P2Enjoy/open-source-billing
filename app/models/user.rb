@@ -106,11 +106,11 @@ class User < ApplicationRecord
   end
 
   def currency_symbol
-    "$"
+    "€"
   end
 
   def currency_code
-    "USD"
+    "EUR"
   end
 
   def already_exists?(email)

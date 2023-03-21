@@ -57,8 +57,8 @@
               <% if client_credit > 0 %>
                 <div class="col s12">
                   <input type="checkbox" class="filled-in apply_credit" id="filled-in-box" />
-                  <label for="filled-in-box"> <%= t('views.payments.apply_from_credit') %> <%= payment.invoice.currency.present? ? payment.invoice.currency.code : 'USD' %>
-                    <span class="credit_amount" style="display: none;"><%= client_credit %></span><%= number_to_currency(client_credit, unit: payment.invoice.currency.present? ? payment.invoice.currency.unit : '$') %>
+                  <label for="filled-in-box"> <%= t('views.payments.apply_from_credit') %> <%= payment.invoice.currency.present? ? payment.invoice.currency.code : 'EUR' %>
+                    <span class="credit_amount" style="display: none;"><%= client_credit %></span><%= number_to_currency(client_credit, unit: payment.invoice.currency.present? ? payment.invoice.currency.unit : '€') %>
                     <%= t('views.common.available') %>
                   </label>
                 </div>

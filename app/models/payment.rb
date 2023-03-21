@@ -53,7 +53,7 @@ class Payment < ApplicationRecord
 
   scope :received, -> { where("payment_amount >= ?", 0) }
   scope :refunds, -> { where("payment_amount < ?", 0) }
-  scope :in_year, ->(year) { where('extract(year from payments.created_at) = ?', year) }
+  scope :in_year, ->(year) { where("strftime('%Y', payments.created_at) = ?", year) }
 
   paginates_per 10
 

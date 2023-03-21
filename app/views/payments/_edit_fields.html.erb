@@ -35,18 +35,18 @@
 
               <div class="invoice_data_row">
                 <div class="invoice_label"><%= t('views.invoices.invoice_amount') %><span>:</span></div>
-                <div class="inovice_description amount"><%= number_to_currency(payment.invoice.try(:invoice_total), unit: payment.invoice.try(:currency).present? ? payment.invoice.try(:currency).unit : "$") %></div>
+                <div class="inovice_description amount"><%= number_to_currency(payment.invoice.try(:invoice_total), unit: payment.invoice.try(:currency).present? ? payment.invoice.try(:currency).unit : "€") %></div>
               </div>
 
               <% if %w(partial draft-partial).include?(payment.invoice.try(:status)) && payment.invoice.try(:invoice_total) > Payment.invoice_remaining_amount(payment.invoice.try(:id)) %>
                   <div class="invoice_data_row">
                     <div class="invoice_label"><%= t('views.common.received') %><span>:</span></div>
-                    <div class="inovice_description"><%= number_to_currency(payment.invoice.try(:invoice_total) - Payment.invoice_remaining_amount(payment.invoice.try(:id)),unit: payment.invoice.currency.present? ? payment.invoice.try(:currency).try(:unit): "$") %></div>
+                    <div class="inovice_description"><%= number_to_currency(payment.invoice.try(:invoice_total) - Payment.invoice_remaining_amount(payment.invoice.try(:id)),unit: payment.invoice.currency.present? ? payment.invoice.try(:currency).try(:unit): "€") %></div>
                   </div>
 
                   <div class="invoice_data_row">
                     <div class="invoice_label"><%= t('views.payments.net_due') %><span>:</span></div>
-                    <div class="inovice_description"><%= number_to_currency(Payment.invoice_remaining_amount(payment.invoice.try(:id)),unit: payment.invoice.currency.present? ? payment.invoice.try(:currency).try(:unit) : "$") %></div>
+                    <div class="inovice_description"><%= number_to_currency(Payment.invoice_remaining_amount(payment.invoice.try(:id)),unit: payment.invoice.currency.present? ? payment.invoice.try(:currency).try(:unit) : "€") %></div>
                   </div>
               <% end %>
 

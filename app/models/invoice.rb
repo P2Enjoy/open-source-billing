@@ -42,7 +42,7 @@ class Invoice < ApplicationRecord
   scope :by_client, -> (client_id) { where('invoices.client_id IN(?)', client_id) }
   scope :with_clients, -> { joins("LEFT OUTER JOIN clients ON clients.id = invoices.client_id ")}
 
-  scope :in_year, ->(year) { where('extract(year from invoices.created_at) = ?', year) }
+  scope :in_year, ->(year) { where("strftime('%Y', invoices.created_at) = ?", year) }
 
   # constants
   STATUS_DESCRIPTION = {
@@ -186,11 +186,11 @@ class Invoice < ApplicationRecord
   end
 
   def currency_symbol
-    self.currency.present? ? self.currency.code : '$'
+    self.currency.present? ? self.currency.code : '€'
   end
 
   def currency_code
-    self.currency.present? ? self.currency.unit : 'USD'
+    self.currency.present? ? self.currency.unit : 'EUR'
   end
 
   def self.get_next_invoice_number user_id
@@ -363,7 +363,7 @@ class Invoice < ApplicationRecord
         :item_name => "Invoice",
         :item_number => id,
         :amount => unpaid_amount,
-        :currency_code => (self.currency.unit rescue 'USD')
+        :currency_code => (self.currency.unit rescue 'EUR')
     }
     fetch_paypal_url(user) + values.to_query
   end

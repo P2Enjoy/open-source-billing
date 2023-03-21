@@ -279,9 +279,9 @@ class PaymentsController < ApplicationController
   def get_org_name
     org_name = <<-SQL
       case when payments.invoice_id is null then
-        case when ifnull(payments_clients.organization_name, '') = '' then concat(payments_clients.first_name, '', payments_clients.last_name) else payments_clients.organization_name end
+        case when ifnull(payments_clients.organization_name, '') = '' then (payments_clients.first_name || '' || payments_clients.last_name) else payments_clients.organization_name end
       else
-        case when ifnull(clients.organization_name, '') = '' then concat(clients.first_name, '', clients.last_name) else clients.organization_name end
+        case when ifnull(clients.organization_name, '') = '' then (clients.first_name || '' || clients.last_name) else clients.organization_name end
       end
     SQL
     org_name

@@ -33,8 +33,8 @@ module Reporting
       # merge invoices and payments in activity array
       recent_activity = []
 
-      invoices.each { |inv| recent_activity << {:activity_type => "invoice", :activity_action => "sent to", :client => (inv.unscoped_client.organization_name rescue ''), :amount => inv.invoice_total, :unit => (inv.currency.present? ? inv.currency.unit : "USD"), :code => (inv.currency.present? ? inv.currency.code : "$"), :activity_date => inv.created_at.strftime("%d/%m/%Y"), :activity_path => "/invoices/#{inv.id}/edit"} }
-      payments.each { |pay| recent_activity << {:activity_type => "payment", :activity_action => "received from", :client => (pay.invoice.unscoped_client.organization_name rescue ''), :amount => pay.payment_amount, :unit => (pay.invoice.currency.present? ? pay.invoice.currency.unit : "USD"), :code => (pay.invoice.currency.present? ? pay.invoice.currency.code : "$"), :activity_date => pay.created_at.strftime("%d/%m/%Y"), :activity_path => "/payments/#{pay.id}/edit"} }
+      invoices.each { |inv| recent_activity << {:activity_type => "invoice", :activity_action => "sent to", :client => (inv.unscoped_client.organization_name rescue ''), :amount => inv.invoice_total, :unit => (inv.currency.present? ? inv.currency.unit : "EUR"), :code => (inv.currency.present? ? inv.currency.code : "€"), :activity_date => inv.created_at.strftime("%d/%m/%Y"), :activity_path => "/invoices/#{inv.id}/edit"} }
+      payments.each { |pay| recent_activity << {:activity_type => "payment", :activity_action => "received from", :client => (pay.invoice.unscoped_client.organization_name rescue ''), :amount => pay.payment_amount, :unit => (pay.invoice.currency.present? ? pay.invoice.currency.unit : "EUR"), :code => (pay.invoice.currency.present? ? pay.invoice.currency.code : "€"), :activity_date => pay.created_at.strftime("%d/%m/%Y"), :activity_path => "/payments/#{pay.id}/edit"} }
       # sort them by created_at in descending order
       recent_activity.sort{ |a, b| b[:activity_date] <=> a[:activity_date] }
     end
@@ -51,8 +51,8 @@ module Reporting
       # merge invoices and payments in activity array
       recent_activity = []
 
-      invoices.each { |inv| recent_activity << {:activity_type => "invoice", :activity_action => "received invoice", :amount => inv.invoice_total, :unit => (inv.currency.present? ? inv.currency.unit : "USD"), :code => (inv.currency.present? ? inv.currency.code : "$"), :activity_date => inv.created_at.strftime("%d/%m/%Y"), :activity_path => "/invoices/#{inv.id}/edit"} }
-      payments.each { |pay| recent_activity << {:activity_type => "payment", :activity_action => "paid", :client => (pay.invoice.unscoped_client.organization_name rescue ''), :amount => pay.payment_amount, :unit => (pay.invoice.currency.present? ? pay.invoice.currency.unit : "USD"), :code => (pay.invoice.currency.present? ? pay.invoice.currency.code : "$"), :activity_date => pay.created_at.strftime("%d/%m/%Y"), :activity_path => "/payments/#{pay.id}/edit"} }
+      invoices.each { |inv| recent_activity << {:activity_type => "invoice", :activity_action => "received invoice", :amount => inv.invoice_total, :unit => (inv.currency.present? ? inv.currency.unit : "EUR"), :code => (inv.currency.present? ? inv.currency.code : "€"), :activity_date => inv.created_at.strftime("%d/%m/%Y"), :activity_path => "/invoices/#{inv.id}/edit"} }
+      payments.each { |pay| recent_activity << {:activity_type => "payment", :activity_action => "paid", :client => (pay.invoice.unscoped_client.organization_name rescue ''), :amount => pay.payment_amount, :unit => (pay.invoice.currency.present? ? pay.invoice.currency.unit : "EUR"), :code => (pay.invoice.currency.present? ? pay.invoice.currency.code : "€"), :activity_date => pay.created_at.strftime("%d/%m/%Y"), :activity_path => "/payments/#{pay.id}/edit"} }
       # sort them by created_at in descending order
       recent_activity.sort{ |a, b| b[:activity_date] <=> a[:activity_date] }
     end
@@ -136,7 +136,7 @@ module Reporting
                 clients.organization_name AS client_name,
                 invoices.invoice_total,
                 IFNULL(SUM(payments.payment_amount), 0) payment_received,
-                DATEDIFF('#{Date.today}', DATE(IFNULL(invoices.due_date, invoices.invoice_date))) age,
+                (JULIANDAY('#{Date.today}')- JULIANDAY(IFNULL(invoices.due_date, invoices.invoice_date))) age,
                 invoices.`status`
               FROM `invoices`
                 INNER JOIN `clients` ON `clients`.`id` = `invoices`.`client_id`

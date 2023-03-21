@@ -46,11 +46,11 @@
         <div class="item-result">
           <div class="table-row">
             <span><strong><%= t('views.estimates.subtotal') %></strong></span>
-            <span><strong><%= number_to_currency(estimate.sub_total, unit: estimate.currency.present? ? estimate.currency.unit : '$') %></strong></span>
+            <span><strong><%= number_to_currency(estimate.sub_total, unit: estimate.currency.present? ? estimate.currency.unit : '€') %></strong></span>
           </div>
           <div class="table-row">
             <span><%= t('views.common.discount') %> <%= estimate.discount_percentage %><%= estimate.discount_type %></span>
-            <span><%= number_to_currency(estimate.discount_amount, unit: estimate.currency.present? ? estimate.currency.unit : '$') %></span>
+            <span><%= number_to_currency(estimate.discount_amount, unit: estimate.currency.present? ? estimate.currency.unit : '€') %></span>
           </div>
           <% unless estimate.tax_detail_with_discount.blank? %>
             <%= taxes_list(estimate.tax_detail_with_discount,estimate) %>
@@ -63,7 +63,7 @@
         <div class="item-total">
           <div class="table-row">
             <span><strong><%= t('views.common.total') %></strong></span>
-            <span><strong><%= number_to_currency(estimate.estimate_total, unit: estimate.currency.present? ? estimate.currency.unit : '$') %></strong></span>
+            <span><strong><%= number_to_currency(estimate.estimate_total, unit: estimate.currency.present? ? estimate.currency.unit : '€') %></strong></span>
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@
     <%= render 'estimates/estimate_history' unless (request.format.pdf? || current_portal_client.present? || session[:masquerade_client_id].present? ) %>
     <div class="modal-footer clearfix">
       <div class="left-section left">
-        <p><%= t('views.estimates.this_estimate_was_sent_using') %> <%= link_to image_tag('m-bottom-logo.jpg', alt: "bottom-logo", class: "responsive-img"), 'http://opensourcebilling.org/' %></p>
+        <p><%= t('views.estimates.this_estimate_was_sent_using') %> <%= link_to image_tag('m-bottom-logo.jpg', alt: "bottom-logo", class: "responsive-img"), 'https://invoices.p2enjoy.studio' %></p>
       </div>
     </div>
 

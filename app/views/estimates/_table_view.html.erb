@@ -36,7 +36,7 @@
             <td><%= estimate.estimate_date rescue '' %></td>
             <td>
               <em>
-                <%= "#{number_to_currency(estimate.estimate_total, unit: estimate.currency.present? ? estimate.currency.code : "$")} " %> <span><%= estimate.currency.unit%></span>
+                <%= "#{number_to_currency(estimate.estimate_total, unit: estimate.currency.present? ? estimate.currency.code : "€")} " %> <span><%= estimate.currency.unit%></span>
               </em>
             </td>
             <td class="<%= estimate.status %>" title="<%= estimate.tooltip %>">

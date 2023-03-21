@@ -146,7 +146,7 @@ module InvoicesHelper
 
   def number_to_currency1(number, options={})
     return nil unless number
-    symbol       = options[:unit] || 'USD'
+    symbol       = options[:unit] || 'EUR'
     precision    = options[:precision] || 2
     old_currency = number_to_currency(number, {precision: precision})
     old_currency.chr=='-' ? old_currency.slice!(1) : old_currency.slice!(0)
@@ -155,7 +155,7 @@ module InvoicesHelper
 
   def taxes_list list,invoice=nil
     tax_list = ""
-    currency_unit = invoice.nil? ? '$' : (invoice.currency.present? ? invoice.currency.unit : '$')
+    currency_unit = invoice.nil? ? '€' : (invoice.currency.present? ? invoice.currency.unit : '€')
     for tax, amount in list
       tax_list += <<-HTML
       <div class="table-row"><span>#{tax}</span><span>#{number_to_currency(amount,unit: currency_unit)}</span></div>
@@ -166,7 +166,7 @@ module InvoicesHelper
 
   def taxes_list_print list,invoice=nil
     tax_list = ""
-    currency_unit = invoice.nil? ? '$' : (invoice.currency.present? ? invoice.currency.unit : '$')
+    currency_unit = invoice.nil? ? '€' : (invoice.currency.present? ? invoice.currency.unit : '€')
     for tax, amount in list
       tax_list += <<-HTML
       <div class="top_right_row"><div class="preview_right_label">#{tax}</div><div class="preview_right_description">#{number_to_currency(amount,unit: currency_unit)}</div></div>
@@ -178,7 +178,7 @@ module InvoicesHelper
 
   def taxes_latest_list_print list,invoice=nil
     tax_list = '<div class="new-invoice-footer-row">'
-    currency_unit = invoice.nil? ? '$' : (invoice.currency.present? ? invoice.currency.unit : '$')
+    currency_unit = invoice.nil? ? '€' : (invoice.currency.present? ? invoice.currency.unit : '€')
     for tax, amount in list
       tax_list += <<-HTML
       <span>#{tax}</span>

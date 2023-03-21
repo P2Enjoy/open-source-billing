@@ -7,7 +7,7 @@
       <h2><%= resource_class.name.eql?('User') ? t('views.sessions.sign_in') : t('views.sessions.client_sign_in') %></h2>
       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {novalidate: '', id: 'user_login' , class: 'col s12'}) do |f| %>
         <div class='input-field'>
-          <%= f.email_field :email, :id => "email", :class => 'validate', value: ('demo@opensourcebilling.org' if OSB::CONFIG::DEMO_MODE) %>
+          <%= f.email_field :email, :id => "email", :class => 'validate', value: ('billing@p2enjoy.studio' if OSB::CONFIG::DEMO_MODE) %>
           <label for='email'><%= t('views.common.email') %></label>
         </div>
         <div class='input-field'>
@@ -32,10 +32,6 @@
           <% end %>
         </div>
       <%end%>
-      <p class='col s12'>
-        <%= link_to 'www.opensourcebilling.org', 'http://opensourcebilling.org/', target: '_blank' %>.
-        <%= t('views.sessions.powered_by') %>: <%= link_to 'presstigers.com', 'https://www.presstigers.com/', target: '_blank' %>
-      </p>
       <% if User.all.empty? %>
         <a href="<%= new_user_registration_path %>" class="btn-login-add btn-floating btn-large waves-effect waves-light"><i class="material-icons">add</i></a>
       <% end %>

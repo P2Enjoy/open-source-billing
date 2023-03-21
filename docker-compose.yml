@@ -1,36 +1,10 @@
 version: '3'
 services:
-  db:
-    image: mysql/mysql-server:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: sergey
-      MYSQL_DATABASE: photo_app
-      MYSQL_USER: sergey
-      MYSQL_PASSWORD: sergey
-    ports:
-      - "3308:3308"
-  web:
-    build:
-      context: .
-      dockerfile: ./docker/web/Dockerfile
-    volumes:
-      - ./docker/web/etc/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
-    ports:
-      - "8080:80"
-    depends_on:
-      - app
   app:
     build:
       context: .
       dockerfile: ./docker/app/Dockerfile
     volumes:
-      - .:/myapp
-      - bundle:/usr/local/bundle
+      - ./vendor:/usr/src/osb/vendor
     ports:
-      - "3000:3000"
-    depends_on:
-      - db
-    tty: true
-volumes:
-  data:
-  bundle:
+      - "6000:3000"

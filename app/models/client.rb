@@ -199,11 +199,11 @@ class Client < ApplicationRecord
   end
 
   def currency_symbol
-    self.currency.present? ? self.currency.code : '$'
+    self.currency.present? ? self.currency.code : '€'
   end
 
   def currency_code
-    self.currency.present? ? self.currency.unit : 'USD'
+    self.currency.present? ? self.currency.unit : 'EUR'
   end
 
   def self.get_clients(params)

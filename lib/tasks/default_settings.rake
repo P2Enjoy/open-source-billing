@@ -4,7 +4,7 @@ namespace :application_settings do
     Settings.delete_all
 
     Settings.currency = "On"
-    Settings.default_currency = "USD"
+    Settings.default_currency = "EUR"
     Settings.date_format = "%Y-%m-%d"
     Settings.invoice_number_format = "{{invoice_number}}"
   end

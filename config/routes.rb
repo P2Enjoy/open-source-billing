@@ -1,4 +1,3 @@
-require 'sidekiq/web'
 Osb::Application.routes.draw do
 
 
@@ -9,8 +8,6 @@ Osb::Application.routes.draw do
 
   mount OsbApi::Engine => "/api"
   mount GrapeSwaggerRails::Engine => '/api/docs'
-
-  mount Sidekiq::Web => '/sidekiq'
 
   #namespace :OpenSourceBilling do
   #  resources :people

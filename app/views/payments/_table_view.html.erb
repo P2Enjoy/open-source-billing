@@ -45,7 +45,7 @@
             </td>
             <td>
               <em style="float: left">
-                <em><%= "#{number_to_currency(payment.payment_amount, unit: payment.unscoped_invoice.currency.present? ? payment.unscoped_invoice.currency.unit : "$")} " %></em>
+                <em><%= "#{number_to_currency(payment.payment_amount, unit: payment.unscoped_invoice.currency.present? ? payment.unscoped_invoice.currency.unit : "€")} " %></em>
               </em>
               <div class="action-btn-group" style="float: right">
                 <a id="dLabel" class='dropdown-button' href='#' data-activates='dropdown_<%= payment.id %>' data-alignment="right" data-beloworigin="true">

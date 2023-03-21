@@ -12,7 +12,7 @@
       <h5><%= payment.unscoped_client.organization_name rescue '' %></h5>
       <% if payment.unscoped_invoice.present? %>
         <strong><%= link_to payment.unscoped_invoice.invoice_number, payment.unscoped_invoice, remote: true %></strong>
-        <em><%= "#{number_to_currency(payment.payment_amount, unit: payment.unscoped_invoice.currency.present? ? payment.unscoped_invoice.currency.code : "$")} " %><span><%= payment.unscoped_invoice.currency.unit%></span></em>
+        <em><%= "#{number_to_currency(payment.payment_amount, unit: payment.unscoped_invoice.currency.present? ? payment.unscoped_invoice.currency.code : "€")} " %><span><%= payment.unscoped_invoice.currency.unit%></span></em>
       <% end %>
       <div class="card-footer clearfix">
         <span class="invoice-date"><small><%= t('views.payments.payment_date') %>:</small> <%= payment.payment_date rescue "" %></span>

@@ -1,6 +1,6 @@
 class ProjectPolicy < ApplicationPolicy
 
-  def index
+  def index?
     permission = user.role.permissions.time_tracking
     return true if permission.can_read?
   end

@@ -1,3 +1,3 @@
 class ApplicationMailer < ActionMailer::Base
-  default :from => 'support@opensourcebilling.org'
+  default :from => 'billing@p2enjoy.studio'
 end

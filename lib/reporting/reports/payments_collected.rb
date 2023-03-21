@@ -43,7 +43,7 @@ module Reporting
         invoices.invoice_number,
         invoices.id as invoice_id,
         IFNULL(invoices.currency_id,0) as currency_id,
-        IFNULL(currencies.unit,'USD') as currency_code,
+        IFNULL(currencies.unit,'EUR') as currency_code,
         clients.organization_name as client_name,
         clients.id as client_id,
         payments.payment_type,
@@ -61,12 +61,12 @@ module Reporting
 
         credit_payments = Payment.select(
             "payments.id as payment_id,
-        concat('credit-',payments.id) as invoice_number,
+        ('credit-' || payments.id) as invoice_number,
         '-' as invoice_id,
         clients.organization_name as client_name,
         clients.id as client_id,
         IFNULL(invoices.currency_id,0) as currency_id,
-        IFNULL(currencies.code,'$') as currency_code,
+        IFNULL(currencies.code,'€') as currency_code,
         payments.payment_type,
         payments.payment_method,
         payments.notes,

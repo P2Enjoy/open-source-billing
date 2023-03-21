@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+$VERBOSE=nil
+
 require_relative '../config/boot'
 require 'rake'
 Rake.application.run

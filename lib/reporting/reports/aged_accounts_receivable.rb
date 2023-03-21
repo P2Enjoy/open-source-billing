@@ -59,13 +59,13 @@ module Reporting
             SUM(CASE WHEN aged.age BETWEEN 0 AND 90 THEN aged.invoice_total - aged.payment_received ELSE 0 END) AS client_total
           FROM (
             SELECT
-              case when clients.organization_name = '' then CONCAT(clients.first_name,' ',clients.last_name) else clients.organization_name  end AS client_name,
+              case when clients.organization_name = '' then (clients.first_name || ' ' || clients.last_name) else clients.organization_name  end AS client_name,
               invoices.invoice_total,
               invoices.base_currency_equivalent_total,
               IFNULL(SUM(payments.payment_amount), 0) payment_received,
-              DATEDIFF('#{@report_criteria.to_date}', DATE(IFNULL(invoices.due_date, invoices.invoice_date))) age,
+              (JULIANDAY('#{@report_criteria.to_date}') - JULIANDAY(IFNULL(invoices.due_date, invoices.invoice_date))) age,
               invoices.`status`,
-              IFNULL(currencies.unit,'USD') as currency_code,
+              IFNULL(currencies.unit,'EUR') as currency_code,
               IFNULL(invoices.currency_id,0) as currency_id,
               invoices.id as id
             FROM `invoices`
