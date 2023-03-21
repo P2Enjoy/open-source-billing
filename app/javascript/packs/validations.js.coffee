@@ -2,7 +2,7 @@ class window.Validation
 
   @UserSettingForm = ->
     jQuery.validator.addMethod 'alphanumeric', ((value, element) ->
-      @optional(element) || /^[\w ]+$/i.test(value);
+      @optional(element) || /^([a-zA-Z]|[à-ü]|[À-Ü]|[\w ',.-])+$/i.test(value);
     ), 'Only Letters, Numbers and Underscores are allowed'
 
     $('#sub_user_form').validate
@@ -42,7 +42,7 @@ class window.Validation
 
   @CompanySettingForm = ->
     jQuery.validator.addMethod 'alphanumeric', ((value, element) ->
-      @optional(element) || /^[\w ]+$/i.test(value);
+      @optional(element) || /^([a-zA-Z]|[à-ü]|[À-Ü]|[\w ',.-])+$/i.test(value);
     ), 'Only Letters, Numbers and Underscores are allowed'
 
     $('#companyForm').submit ->
@@ -111,7 +111,7 @@ class window.Validation
 
   @RoleSettingForm = ->
     jQuery.validator.addMethod 'alphanumeric', ((value, element) ->
-      @optional(element) || /^[\w ]+$/i.test(value);
+      @optional(element) || /^([a-zA-Z]|[à-ü]|[À-Ü]|[\w ',.-])+$/i.test(value);
     ), 'Only Letters, Numbers and Underscores are allowed'
 
     $('#new_role').validate
@@ -202,7 +202,7 @@ class window.Validation
     ), 'Only two decimal places are allowed'
 
     jQuery.validator.addMethod 'alphanumeric', ((value, element) ->
-      @optional(element) || /^[\w ]+$/i.test(value);
+      @optional(element) || /^([a-zA-Z]|[à-ü]|[À-Ü]|[\w ',.-])+$/i.test(value);
     ), 'Only Letters, Numbers and Underscores are allowed'
 
     $('.item_form').submit ->
@@ -250,7 +250,7 @@ class window.Validation
     ), 'Only two decimal places are allowed'
 
     jQuery.validator.addMethod 'alphanumeric', ((value, element) ->
-      @optional(element) || /^[\w ]+$/i.test(value);
+      @optional(element) || /^([a-zA-Z]|[à-ü]|[À-Ü]|[\w ',.-])+$/i.test(value);
       ), 'Only Letters, Numbers and Underscores are allowed'
 
     $('.tax_form').submit ->
