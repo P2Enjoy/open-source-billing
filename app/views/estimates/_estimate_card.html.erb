@@ -6,7 +6,8 @@
     <div class="checkbox-item">
       <%= check_box_tag "estimate_ids[]", estimate.id, false, :id => "estimate_#{estimate.id}", class: "filled-in" %>
       <label for="<%= "estimate_#{estimate.id}" %>"></label>
-      <div class="invoice-name <%= random_card_color %>"><%= estimate.estimate_name %></div>
+      <% client = Client.with_deleted.find_by(id: estimate.client_id) %>
+      <div class="invoice-name <%= random_card_color %>"><%= estimate.estimate_name(client) %></div>
     </div>
     <div class="invoice-details">
       <h5><%= estimate.unscoped_client.organization_name rescue '' %></h5>
