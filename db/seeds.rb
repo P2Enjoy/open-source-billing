@@ -262,7 +262,7 @@ Role.create name: client_role, for_client: true, deletable: false
 Permission.delete_all
 Permission.create(role_id: Role.first.id, entity_type: "Invoice", can_read: true, can_update: true, can_delete: true, can_create: true)
 Permission.create(role_id: Role.first.id, entity_type: "Estimate", can_read: true, can_update: true, can_delete: true, can_create: true)
-Permission.create(role_id: Role.first.id, entity_type: "Time Tracking", can_read: true, can_update: true, can_delete: true, can_create: true)
+Permission.create(role_id: Role.first.id, entity_type: "Time Tracking", can_read: false, can_update: false, can_delete: false, can_create: false)
 Permission.create(role_id: Role.first.id, entity_type: "Payment", can_read: true, can_update: true, can_delete: true, can_create: true)
 Permission.create(role_id: Role.first.id, entity_type: "Client", can_read: true, can_update: true, can_delete: true, can_create: true)
 Permission.create(role_id: Role.first.id, entity_type: "Item", can_read: true, can_update: true, can_delete: true, can_create: true)

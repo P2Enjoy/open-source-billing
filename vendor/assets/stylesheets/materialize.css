@@ -2552,7 +2552,7 @@ ul:not(.browser-default) li {
 }
 
 a {
-  color: #09b8e2;
+  color: #D9CF4A;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -5169,7 +5169,7 @@ small {
 .btn, .btn-large {
     text-decoration: none;
     color: #fff;
-    background-color: #09b8e2;
+    background-color: #D9CF4A;
     text-align: center;
     letter-spacing: .5px;
     transition: .2s ease-out;

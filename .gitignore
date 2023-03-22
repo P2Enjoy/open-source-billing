@@ -6,6 +6,7 @@
 /db/*.sqlite3
 /db/schema.rb
 /db/*.sqlite3-journal
+/db/osb_*
 
 # Ignore all logfiles and tempfiles.
 log/*.log

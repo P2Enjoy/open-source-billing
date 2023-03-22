@@ -154,12 +154,12 @@ a.modal-close i{
     padding-bottom: 2px;
 }
 .inline_form input[type='submit']{
-    background-color: #09b8e2;
+    background-color: #D9CF4A;
     float: right;
 
 }
 .inline_form input[type='submit']{
-    background-color: #09b8e2;
+    background-color: #D9CF4A;
 }
 
 .inline_form .input-field .select-wrapper .dropdown-content li span {
@@ -304,7 +304,7 @@ span.invoice-recurring-status{
     margin: 0;
     line-height: 1.4;
     font-weight: 400;
-    color: #09b8e2;
+    color: #D9CF4A;
 }
 
 .time-tracking .breadcrum-bar .select-wrapper .select-dropdown{
@@ -500,7 +500,7 @@ span.invoice-recurring-status{
 }
 
 .site-btn, .site-btn:hover, .site-btn:focus{
-    background-color: #09b8e2 !important;
+    background-color: #D9CF4A !important;
     color: white !important;
 }
 
@@ -542,7 +542,7 @@ top: 0px;
 }
 
 [type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:after{
-    background: #09b8e2 !important;
+    background: #D9CF4A !important;
 }
 
 form .select-wrapper .dropdown-content {
@@ -649,9 +649,9 @@ form .select-wrapper .dropdown-content {
     text-align: center !important;
 }
 #payments_form .submit_payment_form:hover {
-    background-color: #09b8e2;
+    background-color: #D9CF4A;
     color: #fff;
-    border-color: #09b8e2; }
+    border-color: #D9CF4A; }
 .fields-container{
     padding-bottom: 5px !important;
 }
@@ -720,15 +720,15 @@ form .select-wrapper .dropdown-content {
 .lb_contents { display: contents; }
 
 /*input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]){*/
-    /*border-bottom: 1px solid #09b8e2; !* fixed discount amount field for invoice *!*/
-    /*box-shadow: 0 1px 0 0 #09b8e2;*/
+    /*border-bottom: 1px solid #D9CF4A; !* fixed discount amount field for invoice *!*/
+    /*box-shadow: 0 1px 0 0 #D9CF4A;*/
 /*}*/
 input[type=number]:focus:not([readonly]){
     border-bottom: none;
     box-shadow: none;
 }
 #main-content h3.with-grid-icons a.plus-add-icon i:hover {
-    color: #09b8e2;
+    color: #D9CF4A;
 }
 #main-content h3.with-grid-icons a.plus-add-icon i {
     padding-bottom: 3px;

@@ -22,7 +22,7 @@
     i {
       color: #a6a6a6;
       vertical-align: bottom;
-      &hover { color: #09b8e2; }
+      &hover { color: #D9CF4A; }
     }
   }
   .right div.separator {
@@ -35,9 +35,9 @@
     border-radius: 5px;
   }
   .right a {
-    &.active i { color: #09b8e2; }
+    &.active i { color: #D9CF4A; }
     i { color: #a6a6a6; }
-    i:hover { color: #09b8e2; }
+    i:hover { color: #D9CF4A; }
     &.show-filters i { font-size: 20px; }
   }
 }
@@ -69,7 +69,7 @@
       font-size: 16px;
       color: #a6a6a6;
 
-      &:hover{  color: #09b8e2;  }
+      &:hover{  color: #D9CF4A;  }
     }
 
     ul.dropdown-content.z-depth-4 {
@@ -86,7 +86,7 @@
         }
 
         &:hover {
-          i {  color: #09b8e2;  }
+          i {  color: #D9CF4A;  }
         }
       }
     }
