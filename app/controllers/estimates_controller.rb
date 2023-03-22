@@ -116,6 +116,7 @@ class EstimatesController < ApplicationController
     @images_path = "#{request.protocol}#{request.host_with_port}/assets"
     estimate_id = OSB::Util.decrypt(params[:id])
     @estimate = Estimate.find(estimate_id)
+    @client = Client.unscoped.find_by_id @estimate.client_id
     respond_to do |format|
       format.pdf do
         file_name = "Estimate-#{Date.today.to_s}.pdf"

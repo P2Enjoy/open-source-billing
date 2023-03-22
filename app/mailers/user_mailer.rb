@@ -55,6 +55,6 @@ class UserMailer < ApplicationMailer
     recipient = @user.email
     @import_data_result_message = import_data_result_message
     @module_name = module_name
-    mail(to: recipient, subject: "OpenSourceBilling: Quickbooks import data result for #{module_name} module")
+    mail(to: recipient, subject: "Quickbooks import data result for #{module_name} module")
   end
 end
